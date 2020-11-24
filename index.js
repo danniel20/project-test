@@ -1,9 +1,18 @@
 
 const express = require('express')
 const app = express()
+const path = require('path')
+
+// Configurações express
+app.use(express.urlencoded({extended: true}))
+app.use(express.static(path.resolve('node_modules/bootstrap/dist/')))
+
+// Configurações da view com ejs
+app.set('views', path.resolve('src/app/views'))
+app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.render('index')
 })
 
 app.listen(process.env.PORT, () => {
